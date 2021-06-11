@@ -1,19 +1,17 @@
 'use strict';
-const hello = require('../controllers/hello');
-const iot = require('../controllers/iot');
+const routeConfiguration = require('./routeConfiguration');
 
 const routes = (server) => {
-    server.get('/', async (req, res) => res.status(200).send(hello.read()));
-
-    server.get('/iot', async (req, res) => {
-        res.status(200).send(await iot.read())
-    })
-
-    server.post('/iot', async (req, res) => {
-        res.status(201).send(await iot.save(req.body))
-    })
+    routeConfiguration.forEach(route => {
+        if (route.method === 'GET') {
+            server.get(route.path, async (req, res) => res.status(200).send(await route.handler(req.body)));
+        } else if (
+            route.method === 'POST') {
+            server.post(route.path, async (req, res) => res.status(200).send(await route.handler(req.body)));
+        } else {
+            console.error(`${route.method} in ${JSON.stringify(route)} not currently supported.`);
+        }
+    });
 };
-
-
 
 module.exports = routes
