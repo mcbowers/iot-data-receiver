@@ -4,17 +4,17 @@ const iot = require('../controllers/iot');
 
 module.exports = [
     {
-        "method": "GET",
+        "method": "get",
         "path": "/",
         "handler": hello.read
     },
     {
-        "method": "GET",
+        "method": "get",
         "path": "/iot",
         "handler": iot.read
     },
     {
-        "method": "POST",
+        "method": "post",
         "path": "/iot",
         "handler": iot.write
     }

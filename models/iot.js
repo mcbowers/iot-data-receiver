@@ -1,10 +1,11 @@
 'use strict';
 const { MongoClient } = require('mongodb');
+const connectionString = `mongodb://${process.env.MONGO_SERVICE_HOST || 'localhost'}:27017/iot`
 let mongo = null;
 
 const assertConnection = async () => {
     if (mongo === null) {
-        mongo = await new MongoClient('mongodb://localhost:27017/iot', { useUnifiedTopology: true, useNewUrlParser: true });
+        mongo = await new MongoClient(connectionString, { useUnifiedTopology: true, useNewUrlParser: true });
         await mongo.connect();
     };
 }
