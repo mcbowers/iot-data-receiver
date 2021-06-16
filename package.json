@@ -13,7 +13,7 @@
   "scripts": {
     "test": "export PORT=4000; node index",
     "build": "mkdir -p build; cp package.json build; cd build; npm install --production; cd ..; docker build -t pushbuttonfun.com/$npm_package_name:latest .",
-    "start": "docker rm -f $npm_package_name; docker run -d --name $npm_package_name -p 4000:4000 -e MONGO_SERVICE_HOST=\"10.0.0.111\" --network bridge pushbuttonfun.com/$npm_package_name:latest",
+    "start": "docker rm -f $npm_package_name; docker run -d --name $npm_package_name -p 3000:3000 -e MONGO_SERVICE_HOST=\"10.0.0.111\" --network bridge pushbuttonfun.com/$npm_package_name:latest",
     "push": "docker tag pushbuttonfun.com/$npm_package_name:latest localhost:5000/pushbuttonfun.com/$npm_package_name:latest; docker push localhost:5000/pushbuttonfun.com/$npm_package_name:latest",
     "deploy": "kubectl apply -f ./k8s.yml"
   },
