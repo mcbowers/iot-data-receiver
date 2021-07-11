@@ -27,11 +27,11 @@ module.exports.insert = async (data) => {
         const db = mongo.db('iot');
         const response = await db.collection('data').insertOne(data);
         if (response.result.ok === 1) {
-            return "Data was inserted.";
+            return 'Data was inserted.';
         } else {
             return new Error('Data was not inserted.');
         }
     } catch (error) {
-        return new Error('Error while inserting: ${error}');
+        return new Error(`Error while inserting: ${error}`);
     }
 }

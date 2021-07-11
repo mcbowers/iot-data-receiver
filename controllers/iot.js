@@ -9,7 +9,7 @@ module.exports.read = async () => {
 module.exports.write = async (data) => {
     const result = await iot.insert(data);
     return (result instanceof Error ?
-        { time: Date(), processed: false, message: Error.toString(), data } :
+        { time: Date(), processed: false, message: result.toString(), data } :
         { time: Date(), processed: true, message: 'Data accepted.', data }
     )
 }
